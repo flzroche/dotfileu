@@ -1,0 +1,69 @@
+// // Zellij Layout KDL File
+// layout {
+//   pane split_direction="vertical" size="70%" {
+//     pane size="30%"
+//   }
+//   pane split_direction="horizontal" size="85%" {
+//     pane
+//   }
+// }
+
+layout {
+    tab name="SSH" focus=true {
+        // 上部にタブバーを配置
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        
+        // メインのペインを水平に分割
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" {
+                pane size="50%" {
+                name "ssh1"
+              }
+                pane size="50%"{
+                name "ssh2"
+              }
+            }
+            
+            pane split_direction="vertical" {
+                pane size="50%" {
+                name "ssh3"
+                }
+                pane size="50%"{
+                name "ssh4"
+                }
+            }
+        }
+    }
+}
+//
+//
+// // Zellij Layout KDL File
+// layout {
+//   tab name="開発" children=true focus=true {
+//     pane size=1 borderless=true {
+//       plugin location="zellij:tab-bar"
+//     }
+//     pane split_direction="horizontal" {
+//       //左ペイン
+//       pane size="70%" {
+//         name "Editor"
+//         command "nvim"
+//         args "."
+//        //右ペイン
+//       pane size="30%" {
+//         name "RemoteSH"
+//         command "nvim"
+//         args "."
+//     }
+//     pane split_direction="vertical" size="30%" {
+//       pane
+//       pane
+//       pane
+//     }
+//   }
+//
+// }
+//
+//

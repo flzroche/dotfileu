@@ -1,0 +1,10 @@
+zoxide:A smarter cd command, helps you jump to directories efficiently.
+curl:Command-line tool for transferring data via URLs.
+eza:Enhanced ls command with better formatting and colors.
+bat:A cat alternative with syntax highlighting.
+fd:A fast and user-friendly alternative to find.
+procs:A modern replacement for ps.
+lsd:A more feature-rich ls command.
+fzf:Command-line fuzzy finder for interactive selection.
+pastel:A color management tool for terminals.
+__install_all__:Install all listed packages.

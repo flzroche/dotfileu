@@ -1,0 +1,118 @@
+format = """
+[░▒▓](#a3aed2)\
+(bg:#c0c0c0)\
+$os\
+[▓▒░](#a3aed2)\
+$directory \
+$git_branch\
+$git_status\
+$git_metrics\
+$fill\n\
+$character\
+"""
+
+# format = '[░▒▓](#a3aed2)(bg:#c0c0c0) $os [▓▒░] $directory $git_branch $git_status $git_metrics $fill $conda $python $character'
+
+
+right_format = """
+$cmd_duration
+$lua
+$rust
+$time
+"""
+
+[os]
+format = "[$symbol   ]($style)"
+style = 'fg:#F92672 bg:#c0c0c0'
+disabled = false
+
+[os.symbols]
+Macos = "  " #リンゴのicon
+Ubuntu = " " #Ubuntuのicon
+
+[directory]
+style = 'fg:#c0c0c0 bg:#272822'
+truncation_length = 6
+truncation_symbol = ' ' # nf-fa-folder_open
+truncate_to_repo = false
+home_symbol = ' ~ ' # nf-costum-home
+read_only = ' 󰌾 ' # nf-md-lock
+read_only_style = 'fg:#f7768e bg:#1a1b26'
+format = '[$path]($osstyle)[$read_only]($read_only_style)'
+# [directory]
+# truncation_length = 5
+# truncation_symbol = ".../"
+# truncate_to_repo = false
+# read_only = " 󰌾" #鍵のicon
+[git_branch]
+symbol = '  ' # nf-fa-github_alt, nf-fa-code_fork
+truncation_length = 4
+truncation_symbol = ''
+style = 'fg:#7aa2f7 bg:#1a1b26'
+format = '[  $symbol$branch(:$remote_branch)]($style)' # nf-pl-left_soft_divider
+
+[git_status]
+style = 'fg:#e0af68 bg:#1a1b26'
+conflicted = '='
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕'
+up_to_date = '✓'
+untracked = '?'
+stashed = '$'
+modified = '!${count}'
+renamed = '»'
+deleted = '✘'
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[git_metrics]
+added_style = 'fg:#9ece6a bg:#1a1b26'
+deleted_style = 'fg:#9ece6a bg:#1a1b26'
+format = '[+$added/-$deleted]($deleted_style)'
+disabled = false
+
+[fill]
+symbol = '─'
+style = '#c0c0c0'
+disabled = false
+
+[conda]
+symbol = ' ' # nf-dev-python
+style = 'fg:#9ece6a bg:#1a1b26'
+format = '[ $symbol$environment ]($style)'
+ignore_base = false
+
+[python]
+symbol = ' ' # nf-dev-python
+format = '[ ${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)'
+pyenv_version_name = false
+style = 'fg:#1a1b26 bg:#9ece6a'
+
+[direnv]
+format = '[$symbol$allowed]($style) '
+style = "bold fg:#1a1b26 bg:#cba6f7"
+disabled = false
+
+[cmd_duration]
+min_time = 1
+style = 'fg:#e0af68'
+format = "[   $duration]($style)" # nf-pl-right_soft_divider, nf-mdi-clock
+
+[lua]
+symbol = "" # nf-seti-lua
+format = '[  $symbol $version](blue)' # nf-pl-right_soft_divider
+
+[rust]
+symbol = "" # nf-dev-rust
+format = '[  $symbol $version](red)' # nf-pl-right_soft_divider
+
+[time]
+disabled = false
+style = 'fg:#73daca'
+format = '[   $time]($style)' # nf-pl-right_soft_divider, nf-fa-clock_o
+time_format = '%T'
+utc_time_offset = '+9'
+
+[character]
+success_symbol = "[❯](#c0c0c0)"
+error_symbol = "[❯](red)"
