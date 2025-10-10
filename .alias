@@ -5,6 +5,10 @@ alias eg='eza -la --group-directories-first'
 alias e='eza -laG --group-directories-first'
 alias tp='top -l 1 -n 0 | grep -E "CPU|PhysMem"'
 
+# lsd
+alias ld='lsd -la'
+alias ldg='lsd -la --group-directories-first'
+
 # FONT
 alias otfname="otfinfo -i"
 alias ffn="otfinfo -i"
