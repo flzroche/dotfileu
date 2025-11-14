@@ -1,36 +1,42 @@
-layout { 
-    tab name="DEV" focus=true { 
-        // 上部にタブバーを配置 
-        pane size=1 borderless=true { 
-            plugin location="zellij:tab-bar" 
-        } 
+layout {
+    tab name="開発" focus=true { // children=true は不要かもしれません
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane split_direction="horizontal" {
+            pane size="75%" split_direction="vertical" {
+                //左ペイン
+                pane size="70%" {
+                    name "Editor"
+                    command "zsh"
+                    args "-c" "cd /Users/roche/DEVELOPMENT/Projects/ && exec zsh"
+                } // paneを閉じる
+                //右ペイン
+                pane size="30%" {
+                    name "GeminiCli"
+                    // こちらのpaneの定義が不完全だったため修正しました
+                }
+            }
         
-        // メインのペインを水平に分割 
-        pane split_direction="horizontal" { 
-            
-            // 【子①】左側のペイン (70%) を、さらに垂直に分割 
-            pane size="70%" split_direction="vertical" { 
-                // 上のペイン (このエリアの70%) でcdしてからnvimを起動 
-                pane size="70%" { 
-                    name "Editor" 
-                    command "bash" 
-                    args "-c" "cd /Users/roche/DEVELOPMENT/Projects/ && nvim ." // ★この部分を修正
-                } 
-                // 下のペイン (このエリアの30%) は通常のターミナル 
-                pane size="30%" 
-                name "Local"
-            } 
-            
-            // 【子②】右側のペイン (30%) を、垂直に3分割 
-            pane size="30%" split_direction="vertical" { 
-                pane size="40%" 
-                pane size="35%" 
-                pane size="25%" 
-            } 
-        } 
-            // 【下】ステータスバー (サイズ1) 
-            pane size=1 borderless=true { 
-                plugin location="zellij:status-bar" 
-            } 
-    } 
+            pane size="25%" split_direction="vertical" {
+                    pane size="40%" {
+                      name "Project Directory"
+                      command "zsh"
+                      args "-c" "cd /Users/roche/DEVELOPMENT/Projects/ && exec zsh"
+                    }
+                    pane size="40%"{
+                      name "HOME"
+                    }
+                    pane size="20%"{
+                      name "LocalServer"
+                      command "zsh"
+                      args "-c" "cd /Users/roche/DEVELOPMENT/Projects/ && exec zsh"
+                    }
+                    
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
 }

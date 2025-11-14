@@ -1,0 +1,47 @@
+# $HOME/.config/alacritty/alacritty.toml
+# by Roche 2025-07-15
+# Change font family="UDEV Gothic35 NFLG"
+
+[general]
+import = [
+  # "~/.config/alacritty/themes/themes/monokai.toml"
+  "~/.config/alacritty/themes/themes/nightfly.toml"
+  # "~/.config/alacritty/themes/themes/alacritty_0_12.toml"
+]
+
+[window]
+opacity = 0.70
+padding.x = 10
+padding.y = 10
+
+# decorations = "Full"
+# decorations_theme_variant = "Dark"
+# startup_mode = "Fullscreen"
+
+[font]
+# normal.family = "UDEV Gothic NFLG"
+# bold.family = "UDEV Gothic NFLG"
+# italic.family = "UDEV Gothic NFLG"
+# bold_italic.family = "UDEV Gothic NFLG"
+
+
+
+normal.family = "Moralerspace Neon"
+bold.family = "Moralerspace Neon"
+italic.family = "Moralerspace Neon"
+bold_italic.family = "Moralerspace Neon"
+size = 12.0 ##############
+
+# [shell]
+# program = "/bin/zsh"
+# args = ["-c", "echo 'Hello alacritty!'"]
+
+[env]
+LANG = "ja_JP.UTF-8"
+LC_ALL = "ja_JP.UTF-8"
+
+[[hints.enabled]]
+regex = "(https?://[^\\s]+)"
+command = "open"
+mouse.enabled = true
+

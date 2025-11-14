@@ -1,0 +1,198 @@
+# espanso match file
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
+matches:
+  - trigger: ",,lorem"
+    replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+  - trigger: ",,dummy"
+    replace: "静かな朝の気配は、かすかな光の揺らぎとともに訪れる。まだ覚めきらぬ空気の中で、遠い鳥のさえずりがいくつも重なり、柔らかな調べとなって広がっていく。人々の営みはやがて動きを帯び、言葉にならないざわめきが街を包み込む。視線の先には形の定まらない景色が浮かび、心はひとときの迷いと安らぎを交互に映し出す。
+時はとどまることなく流れ、昨日と今日とを分かつ境界は、やがて曖昧な色合いをもって溶け合う。書き残された記憶は断片として残り、それ自体が意味を持たずとも、新たな重なりの中で別の価値を宿す。響き合う声は消えても消えきらず、形のない余韻となって心に漂う。
+
+風が通り抜けるたびに、季節の名残は静かに揺れ、手に取ることのできない感覚が肌に触れる。目の前に現れる景色はひとつのきっかけにすぎず、誰もがその先へ進む理由を探している。ふとした瞬間に浮かぶ想いは、行き場を失った雲のように広がり、やがて別の形をもって落ち着いていく。
+光と影が重なり合うその交差点に、確かな意味は求められない。ただ存在していること自体が足りており、繰り返しの中に新しさを見つけることができる。やわらかな静寂に包まれ、言葉以前の感覚が深くしみ込み、ふたたび物語ははじまっていく。"
+
+  - trigger: ",,today"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y/%m/%d %H:%M "
+
+  - trigger: ",,day"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y/%m/%d "
+
+  - trigger: ",,now"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%H:%M "
+
+  - trigger: ",,time"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%H:%M "
+
+  - trigger: ",,react"
+    replace: "npm create vite@latest my-app -- --template react"
+
+  - trigger: ",,beryl"
+    replace: "#猫のいる暮らし #CatsLover #猫好きさんと繫がりたい #猫 #保護猫と暮らす "
+
+  - trigger: ",,apk"
+    replace: "apk pro premium paid"
+
+  - trigger: ",,ouj"
+    replace: "The Open University of Japan"
+
+  - trigger: ",,pubg"
+    replace: "61839414708"
+
+  - trigger: ",,delta"
+    replace: "186380582757822949210"
+
+  - trigger: ",,cr"
+    replace: "=+=+=+=+=+=+=\n
+Copyright © Roche Flunit-La Zepam 2023-2024.\n
+Any reproduction, public performance, alteration, distribution, or other use of this work is prohibited except for private use.\n
+\n
+Description for Japanese\n
+© Roche Flunit-La Zepam 2023-2024\n
+この楽曲は、私的利用の範囲を超えての複製、公衆への送信、改変、転載等を禁止します。"
+
+## コマンド #################
+  - trigger: "``1gyou"
+    replace: "g/^$/,/./-1join"
+
+
+
+## .. URL関連
+  - trigger: "..kodakara"
+    replace: "160.251.233.231"
+
+  - trigger: "..del"
+    replace: "160.251.209.65"
+
+  - trigger: "..azu"
+    replace: "20.41.107.229"
+
+## - means symbol.
+  - trigger: "#1 "
+    replace: "● "
+
+  - trigger: "#2 "
+    replace: "○ "
+
+  - trigger: "#3 "
+    replace: "■ "
+
+  - trigger: "#4 "
+    replace: "◇ "
+
+  - trigger: "#5 "
+    replace: "♦︎ "
+
+  - trigger: "#6 "
+    replace: "♢ "
+
+  - trigger: "#7 "
+    replace: "• "
+
+  - trigger: "#8 "
+    replace: "･ "
+
+  - trigger: "#9 "
+    replace: "※"
+
+  - trigger: "#* "
+    replace: "※"
+
+  - trigger: "#kome "
+    replace: "※"
+
+
+## SIBAN
+
+  - trigger: "#env"
+    replace: "#!/usr/bin/env bash"
+
+  - trigger: "#ruby"
+    replace: "#!/usr/bin/env ruby"
+
+  - trigger: "#rb"
+    replace: "#!/usr/bin/env ruby"
+
+  - trigger: "#bash"
+    replace: "#!/bin/bash"
+
+  - trigger: "#zsh"
+    replace: "#!/bin/zsh"
+
+## ! means Personal Infomation.
+  - trigger: "!fp"
+    replace: "flunit@protonmail.com"
+
+  - trigger: "!flz"
+    replace: "flzroche@gmail.com"
+
+  - trigger: "!kodakara"
+    replace: "kodakarasatoimo@gmail.com"
+
+  - trigger: "!amb"
+    replace: "ambition.five@gmail.com"
+
+  - trigger: "!g.r"
+    replace: "g.ritsuaki@gmail.com"
+
+  - trigger: "!ouj"
+    replace: "2410011270@campus.ouj.ac.jp"
+
+  - trigger: "!tel1"
+    replace: "09029100408"
+
+  - trigger: "!tel2"
+    replace: "09082484165"
+
+  - trigger: "!au"
+    replace: "5166452408366880"
+
+  - trigger: "!jp"
+    replace: "4708910151825988"
+
+  - trigger: "!prime"
+    replace: "5334912474594043"
+
+  - trigger: "!olive"
+    replace: "4708812123961604"
+
+  - trigger: "!yamai"
+    replace: "y.amai@ymail.ne.jp"
+
+  - trigger: "!y.amai"
+    replace: "y.amai@ymail.ne.jp"
+
+  - trigger: "!kodakara"
+    replace: "kodakarasatoimo@gmail.com"
+
+  - trigger: "!pubg"
+    replace: "61839414708"
+
+
+## # means Hashtag
+  - trigger: "#pubg"
+    replace: "#PUBGMOBILE "
+
+  - trigger: "#delta"
+    replace: "#DeltaForce \n#DeltaForceMobile \n#デルタフォース\n"
+

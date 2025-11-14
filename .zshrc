@@ -1,4 +1,5 @@
-source "$HOME/dotfilem/funcs"
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/roche/.zsh/completions:"* ]]; then export FPATH="/Users/roche/.zsh/completions:$FPATH"; fi
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 FPATH=/opt/homebrew/share/zsh-completions:$FPATH
@@ -7,9 +8,10 @@ FPATH=/opt/homebrew/share/zsh/site-functions:$FPATH
 autoload -Uz compinit
 compinit
 
+export DOTS="$HOME/dotfilem"
 export ENDSH="$HOME/endOfScripts:$HOME/endsh"
-export GEMINI_API_KEY='AIzaSyCnRTcycTi1hgzazmbOw0zGtJ0BHRkxdZY'
-export GOOGLE_API_KEY='AIzaSyCnRTcycTi1hgzazmbOw0zGtJ0BHRkxdZY'
+export GEMINI_API_KEY='AIzaSyC4HIwuiHBdYrJRlT2n8aU0L_PpVNEhMxo'
+export GOOGLE_API_KEY='AIzaSyC4HIwuiHBdYrJRlT2n8aU0L_PpVNEhMxo'
 export XDGkCONFIG_HOME="$HOME/.config"
 export PATH="$HOME/.pyenv/shims:$HOME/.cargo/bin:/opt/homebrew/opt:/opt/homebrew/bin:/Library/Android/sdk:$HOME/bin:$HOME/.local/bin:$HOME/scripts:$PATH"
 export EDITOR='vim'
@@ -22,6 +24,7 @@ export GITDIR="$HOME/gD"
 
 export LANG=ja_JP.UTF-8
 
+source "$DOTS/funcs"
 source ~/dotfilem/.alias
 # source ~/dotfilem/.aliasExternal
 source ~/scripts/timer.sh
@@ -59,3 +62,4 @@ if [ -f '/Users/roche/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/roche/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/roche/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/roche/google-cloud-sdk/completion.zsh.inc'; fi
+. "/Users/roche/.deno/env"

@@ -1,0 +1,119 @@
+########## Original Function By Roche.FLZ ##########
+# .zshrc や .bashrc に追記
+# findコマンドのRust版, fd使用時に、除外するディレクトリをここで定義
+fd() {
+  command fd -H \
+    -E ".git" \
+    -E "node_modules" \
+    -E "build" \
+    -E "__pycache__" \
+    -E ".venv" \
+    -E ".DS_Store" \
+    "$@"
+}
+
+woff2name() {
+  local font_file="$1" # 引数をローカル変数に格納
+  if [[ ! -f "$font_file" ]]; then # ファイルが存在するかチェック
+    # エラーメッセージは標準エラー出力に送る
+    echo "エラー: '$font_file' はファイルではありません。" >&2
+    return 1
+  fi
+
+  local ttxfile="${font_file%.*}.ttx"
+  # ttxの標準出力と標準エラー出力を捨てる
+  ttx -t name "$font_file" >/dev/null 2>&1
+
+  local name_output=""
+
+  # nameID="4" (PostScript名) を優先的に探す
+  # ripgrepの出力をキャプチャ
+  name_output=$(rg -A1 'nameID="4" platformID="1"' "$ttxfile" 2>/dev/null | rg -v 'nameID="4" platformID="1"' 2>/dev/null | rg -v '^--$' 2>/dev/null)
+
+  # もしnameID="4"が見つからなければ、nameID="1" (フォントファミリー名) を探す
+  if [[ -z "$name_output" ]]; then
+    name_output=$(rg -A1 'nameID="1" platformID="1"' "$ttxfile" 2>/dev/null | rg -v 'nameID="1" platformID="1"' 2>/dev/null | rg -v '^--$' 2>/dev/null)
+  fi
+
+  # それでも見つからなければ、nameID="6" (完全なフォント名) を探す
+  if [[ -z "$name_output" ]]; then
+    name_output=$(rg -A1 'nameID="6" platformID="1"' "$ttxfile" 2>/dev/null | rg -v 'nameID="6" platformID="1"' 2>/dev/null | rg -v '^--$' 2>/dev/null)
+  fi
+
+  local result_string=""
+  # 最終的にname_outputが空かどうかで判定
+  if [[ -z "$name_output" ]]; then
+    result_string="    nameは存在しません (ファイル: $(basename "$font_file"))" # どのファイルか分かるように修正
+  else
+    result_string="$name_output"
+  fi
+
+  rm -f "$ttxfile" # 一時ファイルを削除
+  echo "$result_string" # 結果を標準出力に返す
+}
+########## woff2nameが使用できなければ以下のコマンドも使用できない Roche.flz ##########
+woff2show() {
+  typeset -i counter=0
+  local files_to_process=()
+  local output_buffer="" # 全ての出力を一時的に保持するバッファ
+
+  # 引数があるかどうかに応じて処理するファイルを決定
+  if [[ "$#" -eq 0 ]]; then
+    # 引数がない場合は、カレントディレクトリの.woff2ファイルを対象とする
+    files_to_process=(*.woff2)
+  else
+    # 引数がある場合は、それらを処理対象とする
+    for arg in "$@"; do
+      if [[ -d "$arg" ]]; then
+        # 引数がディレクトリなら、その中の .woff2 ファイルを追加
+        files_to_process+=("$arg"/*.woff2)
+      elif [[ -f "$arg" && "$arg" == *.woff2 ]]; then
+        # 引数が直接 .woff2 ファイルなら追加
+        files_to_process+=("$arg")
+      else
+        # 不明な引数の場合はエラーメッセージを標準エラー出力へ
+        echo "警告: 無効な引数またはファイル形式です: '$arg'" >&2
+      fi
+    done
+  fi
+
+  # 処理するファイルが見つからない場合の対応
+  # `files_to_process` には glob 展開でマッチしなかったパターンも含まれる可能性があるので、
+  # 実際のファイル数をチェックする
+  local actual_files_found=0
+  for file_path in "${files_to_process[@]}"; do
+    if [[ -f "$file_path" ]]; then
+      actual_files_found=$((actual_files_found + 1))
+    fi
+  done
+
+  if [[ "$actual_files_found" -eq 0 ]]; then
+    echo "処理対象の.woff2ファイルが見つかりません。" >&2
+    return 1
+  fi
+
+  # 収集したファイルリストをループで処理し、出力をバッファに格納
+  for file in "${files_to_process[@]}"; do
+    # ワイルドカード展開の結果、ファイルが存在しない場合はスキップ
+    if [[ ! -f "$file" ]]; then
+        continue
+    fi
+
+    counter=$((counter + 1))
+    # output_buffer に行を追加
+    # printf を使うことで、より厳密なフォーマット制御と改行処理が可能
+    printf -v line_prefix "[%s] " "$counter"
+    output_buffer+="${line_prefix}"
+    output_buffer+="$(woff2name "$file")"
+    output_buffer+=$'\n\n' # 各エントリの後に空行を追加 (2つの改行)
+  done
+
+  # 最後にバッファの内容を標準出力に出力
+  echo -n "$output_buffer" # 最後に余分な改行が入らないように -n を使用
+}
+
+endsh() {
+  mv "$@" endsh/
+}
+
+########## Roche END

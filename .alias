@@ -5,6 +5,13 @@ alias eg='eza -la --group-directories-first'
 alias e='eza -laG --group-directories-first'
 alias tp='top -l 1 -n 0 | grep -E "CPU|PhysMem"'
 
+alias ld='lsd -la'
+alias ldg='lsd -la --group-directories-first'
+
+# Clear Memory
+alias cm='sudo purge'
+
+
 # FONT
 alias otfname="otfinfo -i"
 alias ffn="otfinfo -i"
@@ -31,10 +38,9 @@ alias ..='cd ..'
 alias dev='z ~/DEVELOPMENT'
 alias prj='z ~/DEVELOPMENT/Projects/'
 # これは特殊・特別======
-alias del="z ~/DEVELOPMENT/Projects/deltheta.org"
 # ===================
-alias dot='z ~/dotfilem'
-
+alias .m='z ~/dotfilem'
+alias .u='z ~/dotfileu'
 
 # zoxide 直前にいたディレクトリへ戻る
 alias z-='z -'
@@ -45,8 +51,35 @@ alias gcc='/usr/bin/gcc'
 alias g++='/usr/bin/g++'
 
 # Docker
-alias dkdown='docker compose down --rmi all -v'
-alias dkup='docker compose up -d'
+# docker = dk 
+# build = bd
+# -t image:tag
+# -it image:tag
+# remove contaiiner = rm 
+# remove image = rmi
+# clean = -c
+
+# ex.
+# dkbd fileu:1 . 
+alias dkbd='docker build -t'
+alias dkbd-t='docker build -t '
+alias dkimgs='docker images'
+
+# ex.
+# docker run cnt-xxx fileu:xxxx
+alias dkrun='docker run'
+alias dkrmi='docker rmi '
+alias dkexec='docker exec -it'
+alias dkrun-it='docker run -it --name'
+
+
+alias dkrmcnt-all='docker rm -f $(docker ps -aq)'
+alias dkrmimg-all='docker rmi -f $(docker images -aq)'
+
+# container使用後からのクリーンalias上記と同じもの
+alias dkcnt-c='docker rm -f $(docker ps -aq)'
+alias dkimg-c='docker rmi -f $(docker images -aq)'
+
 
 # ##### Tmux
 # alias tx='tmux'
@@ -62,18 +95,16 @@ alias dkup='docker compose up -d'
 ##### ShortCutkey表示
 alias skey='bat ~/dotfilem/cf.skey'
 
-alias roche@amateru='sshpass -p 'zaq1' ssh roche@160.251.213.40'
-alias root@amateru='sshpass -p 'xsw2zaq!A' ssh root@160.251.213.40'
-
 ##### Replace Tmux to zellij.
 alias zj='zellij'
-alias zjk='zellij kill-session'
-alias zjkill='zellij kill-session'
-# Zellij Layouts
-alias zc="zellij --layout zj-config"
-alias zd="zellij --layout zj-dev"
-alias zs="zellij --layout zj-ssh"
+alias zjks='zellij kill-session'
+alias zjkall='zellij kill-all-sessions'
+alias zjls='zellij ls'
 
+# Zellij Layouts
+alias zjn="zellij -n dotfilem/zj-normal.kdl"
+alias zjd="zellij -n dotfilem/zj-dev.kdl"
+alias zjs="zellij -n dotfilem/zj-ssh.kdl"
 
 #git
 alias g='git'

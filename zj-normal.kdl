@@ -1,0 +1,31 @@
+layout {
+    tab name="NORMAL" focus=true { // children=true は不要かもしれません
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane split_direction="horizontal" {
+            pane size="75%" split_direction="vertical" {
+                //左ペイン
+                pane size="70%" {
+                    name "Editor"
+                    command "nvim"
+                    args "$HOME"
+                } // paneを閉じる
+                //右ペイン
+                pane size="30%" {
+                    name "RightPane"
+                    // こちらのpaneの定義が不完全だったため修正しました
+                }
+            }
+        
+            pane size="25%" split_direction="vertical" {
+                    pane size="40%"
+                    pane size="40%"
+                    pane size="20%"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+}
