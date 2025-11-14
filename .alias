@@ -11,6 +11,9 @@ alias ldg='lsd -la --group-directories-first'
 # Clear Memory
 alias cm='sudo purge'
 
+# lsd
+alias ld='lsd -la'
+alias ldg='lsd -la --group-directories-first'
 
 # FONT
 alias otfname="otfinfo -i"

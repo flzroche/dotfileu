@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 # --- Ubuntu用CLIツールインストーラスクリプト ---
@@ -19,6 +20,14 @@ echo "---------------------------------"
 if ! command -v fzf &> /dev/null; then
     echo "fzfがインストールされていません。先にfzfをインストールします..."
     apt install -y fzf
+fi
+
+# nvim/neovimがなければインストール
+if ! command -v nvim &> /dev/null; then
+    echo "nvim/neovimがインストールされていません。nvim/neovimをインストールします..."
+    apt install -y neovim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 fi
 
 # --- Zsh 初期セットアップ ---
@@ -48,14 +57,13 @@ else
           echo "   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
           echo "---------------------------------"
       else
-          echo "⚠️ Zshの実行ファイルが見つからなかったため、シェル変更はスキップされました。"
+          echo "⚠ Zshの実行ファイルが見つからなかったため、シェル変更はスキップされました。"
       fi
   fi
 fi
 
 # --- ツールのリストと説明 ---
 tools_list=(
-"gemini-cli:Google Gemini APIと対話するためのCLIツール"
 "zoxide:より賢いcdコマンド。効率的にディレクトリを移動できます。"
 "curl:URL経由でデータを転送するためのコマンドラインツール。(通常プリインストール済み)"
 "bat:シンタックスハイライト機能付きのcat代替コマンド。"
@@ -63,10 +71,7 @@ tools_list=(
 "fzf:対話的な選択が可能なコマンドラインファジーファインダー。"
 "eza:lsコマンドのモダンな代替。"
 "lsd:次世代のlsコマンド。"
-"procs:Rustで書かれたpsコマンドのモダンな代替。"
-"pastel:色の生成、分析、変換、操作を行うコマンドラインツール。"
 "ripgrep:正規表現パターンでカレントディレクトリを再帰的に検索する行指向の検索ツール。"
-"tmux:ターミナルマルチプレクサ。1つの画面で複数のターミナルを管理。"
 "zellij:Rust製のモダンなターミナルマルチプレクサ。より使いやすい機能を提供。"
 "zsh:強力で使いやすいコマンドラインシェル。選択するとプラグインもインストールされます。"
 )
@@ -82,11 +87,10 @@ while :; do
         cmd_to_check="$pkg_name"
         [[ "$pkg_name" == "fd-find" ]] && cmd_to_check="fdfind"
         [[ "$pkg_name" == "bat" ]] && cmd_to_check="batcat"
+        [[ "$pkg_name" == "ripgrep" ]] && cmd_to_check="rg" # <--- 修正箇所
 
         is_installed=false
         if command -v "$cmd_to_check" &> /dev/null; then
-            is_installed=true
-        elif [[ "$pkg_name" == "gemini-cli" ]] && command -v gemini &> /dev/null; then
             is_installed=true
         fi
 
@@ -99,11 +103,14 @@ while :; do
     done
 
     if [ ${#uninstalled_packages[@]} -eq 0 ]; then
+        echo "---------------------------------"
+        echo "✅ インストール済みパッケージ一覧:"
+        echo -e "${fzf_preview_content}"
         echo "全ての選択可能なコマンド及びパッケージはインストール済みです。"
         break
     fi
 
-    read -p "全ての未インストールコマンドをインストールしますか？ (y/N): " install_all_response
+    read -p "全ての未インストールコマンドをインストールしますか？(推奨) (y/N): " install_all_response
     selected_packages=""
     if [[ "$install_all_response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
         selected_packages="${uninstalled_packages[*]}"
@@ -122,7 +129,7 @@ while :; do
     apt_packages=()
     for pkg in $selected_packages; do
         case "$pkg" in
-        "gemini-cli" | "eza" | "zellij")
+        "eza" | "zellij")
             ;;
         *)
             apt_packages+=("$pkg")
@@ -144,13 +151,6 @@ while :; do
     for pkg in $selected_packages; do
         echo "---------------------------------"
         case "$pkg" in
-        "gemini-cli")
-            echo "Installing gemini-cli..."
-            if ! command -v pip &> /dev/null; then
-                apt install -y python3-pip
-            fi
-            pip install google-gemini-cli
-            ;;
         "eza")
             echo "Installing eza..."
             apt install -y gpg
@@ -162,7 +162,7 @@ while :; do
             ;;
         "zellij")
             echo "Installing zellij..."
-            LATEST_URL=$(curl -s "https://api.github.com/repos/zellij-org/zellij/releases/latest" | grep "browser_download_url.*zellij-x86_64-unknown-linux-musl.tar.gz" | cut -d '"' -f 4)
+            LATEST_URL=$(curl -s "https://api.github.com/repos/zellij-org/zellij/releases/latest" | grep "browser_download_url" | grep "x86_64-unknown-linux-musl" | cut -d '"' -f 4)
             if [[ -n "$LATEST_URL" ]]; then
                 curl -L "$LATEST_URL" -o zellij.tar.gz
                 tar -xvf zellij.tar.gz
@@ -170,7 +170,7 @@ while :; do
                 rm zellij zellij.tar.gz
                 echo "✅ zellij has been installed to /usr/local/bin/"
             else
-                echo "⚠️ Failed to find the latest zellij release."
+                echo "⚠ Failed to find the latest zellij release."
             fi
             ;;
         esac
@@ -202,3 +202,4 @@ while :; do
 done
 
 echo "スクリプトは正常に終了しました。"
+
