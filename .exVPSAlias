@@ -1,0 +1,9 @@
+alias ctl='sudo systemctl'
+
+# ss='status'
+# re='restart'
+# st='start'
+
+alias ctlss='sudo systemctl status'
+alias ctlre='sudo systemctl restart'
+alias ctlst='sudo systemctl start'

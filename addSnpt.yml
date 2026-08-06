@@ -1,0 +1,197 @@
+# espanso match file v1.0
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
+matches:
+
+# for file format
+
+  - trigger: "--fday"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+
+  - trigger: "--day"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y%m%d"
+
+# for Main
+
+  - trigger: ",,fullday"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y/%m/%d %H:%M"
+
+  - trigger: ",,today"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y/%m/%d "
+
+
+  - trigger: ",,now"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%H:%M "
+
+  - trigger: ",,time"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%H:%M "
+
+  - trigger: ",,lorem"
+    replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+  - trigger: ",,dummy"
+    replace: ""
+
+  - trigger: ",,count"
+    replace: "@文字数カウンター"
+
+  - trigger: ",,beryl"
+    replace: "#猫のいる暮らし #CatsLover #猫好きさんと繋がりたい #猫 #保護猫と暮らす "
+
+
+  - trigger: ",,cr"
+    replace: "=+=+=+=+=+=+=\n
+Copyright © Roche Flunit-La Zepam 2023-2024.\n
+Any reproduction, public performance, alteration, distribution, or other use of this work is prohibited except for private use.\n
+\n
+Description for Japanese\n
+© Roche Flunit-La Zepam 2023-2024\n
+この楽曲は、私的利用の範囲を超えての複製、公衆への送信、改変、転載等を禁止します。"
+
+  - trigger: ",,C"
+    replace: "=+=+=+=+=+=+=\n
+Copyright © Roche Flunit-La Zepam 2023-2024.\n
+Any reproduction, public performance, alteration, distribution, or other use of this work is prohibited except for private use.\n
+\n
+Description for Japanese\n
+© Roche Flunit-La Zepam 2023-2024\n
+この楽曲は、私的利用の範囲を超えての複製、公衆への送信、改変、転載等を禁止します。"
+
+    
+  - trigger: "..git"
+    replace: "https://github.com/flzroche/"
+
+  - trigger: "..ccc"
+    replace: "https://github.com/flzroche/ccc-CITRUS-CIRCUIT-CIRCLE"
+
+## - 小説関連
+  - trigger: "==1"
+    replace: "● "
+
+  - trigger: "==2"
+    replace: "○ "
+
+  - trigger: "==3"
+    replace: "■ " 
+    
+  - trigger: "==c"
+    replace: "@文字数カウンター"
+
+  - trigger: "==d"
+    replace: "――"
+
+  - trigger: "==star1"
+    replace: "★ "
+
+  - trigger: "==star2"
+    replace: "☆ "
+
+  - trigger: "==4"
+    replace: "♢ "
+
+  - trigger: "==m"
+    replace: "♂︎"
+
+  - trigger: "==f "
+    replace: "♀︎"
+
+  - trigger: "==bs "
+    replace: "⌫ "
+
+  - trigger: "==hosi"
+    replace: "★"
+
+  - trigger: "==kome"
+    replace: "※"
+
+  - trigger: "#cmd"
+    replace: "⌘"
+
+  - trigger: "#alt"
+    replace: "⌥"
+
+  - trigger: "#option"
+    replace: "⌥"
+
+  - trigger: "#skey"
+    replace: "^⌥ ⌘ "
+
+## SIBAN
+
+  - trigger: "#env"
+    replace: "#!/usr/bin/env bash"
+
+  - trigger: "#ruby"
+    replace: "#!/usr/bin/env ruby"
+
+  - trigger: "#rb"
+    replace: "#!/usr/bin/env ruby"
+
+  - trigger: "#bash"
+    replace: "#!/bin/bash"
+
+  - trigger: "#zsh"
+    replace: "#!/bin/zsh"
+
+############# コマンド #################
+  - trigger: "#1g"
+    replace: "g/^$/,/./-1join"
+
+  - trigger: "#react"
+    replace: "npm create vite@latest my-app -- --template react"
+
+  # 半角英数字1文字以上
+  - trigger: "#alnum"
+    replace: "[0-9A-Za-z]+"
+  
+  # 半角英数字＋アンダースコア
+  - trigger: "#word"
+    replace: "[0-9A-Za-z_]+"
+  
+  # 単語境界つき
+  - trigger: "#bword"
+    replace: "\\b[0-9A-Za-z_]+\\b"
+  
+  # メールアドレスっぽい
+  - trigger: "#email"
+    replace: '[0-9A-Za-z._%+-]+@[0-9A-Za-z.-]+\.[A-Za-z]+'
+  
+  # 日本の郵便番号
+  - trigger: "#zip"
+    replace: "[0-9]{3}-[0-9]{4}"
+  
+  # 日本の電話番号
+  - trigger: "#tel"
+    replace: "[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}"
+
+
