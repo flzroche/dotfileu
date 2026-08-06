@@ -28,6 +28,7 @@ disabled = false
 
 [os.symbols]
 Macos = "🍎 M3" #リンゴのicon
+# Macos = "  " #リンゴのicon
 Ubuntu = " " #Ubuntuのicon
 
 [directory]

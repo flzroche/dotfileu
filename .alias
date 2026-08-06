@@ -2,25 +2,23 @@ alias pb='pbcopy'
 alias pf='open -a "Path Finder"'
 alias tsinit='npm init -y && tsc --init'
 
-# Doom Emacs 起動コマンド
-# GUIのEmacs（透明化・フォント設定あり）を一瞬で開く
-alias em="emacs"
-alias en="emacs -nw"
-# ターミナル内（Zellijのペイン内など）でサクッと開く
-alias et="emacsclient -t"
-
 #基本コマンド
+# alias el='eza -la'
+# alias elg='eza -la --group-directories-first'
+# alias eg='eza -la --group-directories-first'
+# alias e='eza -laG --group-directories-first'
+
 alias el='exa -la'
 alias elg='exa -la --group-directories-first'
 alias eg='exa -la --group-directories-first'
+alias e='exa -laG --group-directories-first'
 alias tp='top -l 1 -n 0 | grep -E "CPU|PhysMem"'
 
-alias ll='lsd -la'
-alias llg='lsd -la --group-directories-first'
+alias ld='lsd -la'
+alias ldg='lsd -la --group-directories-first'
 
 # Clear Memory
 alias cm='sudo purge'
-alias gemini="/opt/homebrew/bin/gemini"
 
 # FONT
 alias otfname="otfinfo -i"
@@ -46,7 +44,7 @@ alias c='clear'
 # Change Directory系
 alias ..='cd ..'
 alias dev="cd $HOME/DEV"
-alias dot="cd $HOME/dotfilem"
+alias dot="cd $HOME/dotfileu"
 alias dwn="$HOME/Downloads"
 alias dl="$HOME/Downloads"
 alias cfg="$HOME/.config"
@@ -56,6 +54,12 @@ alias cfg="$HOME/.config"
 # ===================
 # alias .m='z ~/dotfilem'
 # alias .u='z ~/dotfileu'
+alias dev='z ~/DEVELOPMENT'
+alias prj='z ~/DEVELOPMENT/PROJECTS/'
+# これは特殊・特別======
+# ===================
+alias .m='z ~/dotfilem'
+alias .u='z ~/dotfileu'
 
 # zoxide 直前にいたディレクトリへ戻る
 alias z-='z -'
@@ -109,6 +113,11 @@ alias dkimg-c='docker rmi -f $(docker images -aq)'
 #
 ##### zj attach main
 alias zja='zellij a main'
+# alias wk='python3 /Users/roche/scripts/w.py'
+# alias wiki='wk wS'
+#
+##### ShortCutkey表示
+alias skey='bat ~/dotfilem/cf.skey'
 
 ##### Replace Tmux to zellij.
 alias zj='zellij'
@@ -120,7 +129,6 @@ alias zjls='zellij ls'
 alias zjn="zellij -n ~/dotfilem/zjnormal.kdl"
 alias zjd="zellij -n ~/dotfilem/zjdev.kdl"
 alias zjs="zellij -n ~/dotfilem/zjssh.kdl"
-
 
 #git
 alias g='git'
