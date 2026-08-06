@@ -1,12 +1,22 @@
 # ==============================================================================
-# 1. Homebrew Initialization (最優先)
+# 1. dotfiles の s なのか m なのか u なのか判別
 # ==============================================================================
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)Vkkk
+# 既存の DOTFILES_DIR 設定を削除（重複防止）
+sed -i '/^DOTFILES_DIR=/d' ~/.zshrc
+
+# 新しい設定を先頭に追加
+# cat << 'EOF' | tee -a ~/.zshrc > /dev/null
+
+# 自動検出された dotfiles ディレクトリ
+DOTFILES_DIR=$(find "$HOME" -maxdepth 1 -type d -name 'dotfile[a-zA-Z]' | head -n1)
+[ -n "$DOTFILES_DIR" ] && export DOTFILES_DIR
 
 # ==============================================================================
 # 2. Environment Variables (環境変数・APIキー)
 # ==============================================================================
 # Editor
+
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
@@ -18,19 +28,12 @@ export LANG=ja_JP.UTF-8
 
 # Directories
 export XDG_CONFIG_HOME="$HOME/.config"
-export DOTS="$HOME/dotfilem"
+export DOTS="$HOME/dotfileu"
 export ENDSH="$HOME/endOfScripts:$HOME/endsh"
 export GITDIR="$HOME/gD"
 
 # Ruby Gems
 export GEM_HOME="$HOME/gems"
-
-# API Keys (※セキュリティのためマスクしています。ご自身の実際のキーに置き換えてください)
-#
-export GEMINI_API_KEY='AIzaSyD1UrLIircdejj1JOZEDku9P_1BJcgsl78'
-export GOOGLE_API_KEY='AIzaSyD1UrLIircdejj1JOZEDku9P_1BJcgsl78'
-export OPENAI_API_KEY='sk-svcacct-IEM5zG...'
-export PERPLEXITY_API_KEY='pplx-RTz3D2KbZC...'
 
 # ==============================================================================
 # 3. PATH Configuration (パスの設定)
@@ -84,14 +87,13 @@ compinit
 # ==============================================================================
 # 6. User Scripts & Aliases (独自スクリプトの読み込み)
 # ==============================================================================
-source "$DOTS/funcs"
-source "$DOTS/.alias"
+source "./.alias"
 
 # ==============================================================================
 # 7. Zsh Plugins (プラグイン)
 # ※シンタックスハイライトは必ず最後に読み込む
 # ==============================================================================
 # --- 一番最後にプラグインを読み込む ---
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+#source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#

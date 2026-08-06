@@ -10,9 +10,9 @@ alias en="emacs -nw"
 alias et="emacsclient -t"
 
 #基本コマンド
-alias el='eza -la'
-alias elg='eza -la --group-directories-first'
-alias eg='eza -la --group-directories-first'
+alias el='exa -la'
+alias elg='exa -la --group-directories-first'
+alias eg='exa -la --group-directories-first'
 alias tp='top -l 1 -n 0 | grep -E "CPU|PhysMem"'
 
 alias ll='lsd -la'

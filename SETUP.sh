@@ -52,6 +52,11 @@ if [[ "$PKG_MGR" == "unknown" ]]; then
   exit 1
 fi
 
+
+# Starship 自動インストール（既存ならスキップ）
+if ! command -v starship >/dev/null 2>&1; then
+    curl -sS https://starship.rs/install.sh | sh
+fi
 # --- Alacrittyのインストール (GUI環境のみ) ---
 if [[ "$OS_TYPE" == "macos" ]] && [[ "$PKG_MGR" == "brew" ]]; then
   echo "Attempting to install or update Alacritty..."
@@ -239,6 +244,7 @@ if [[ "$OS_TYPE" == "macos" ]]; then
 fi
 
 files_to_remove=(
+  "$HOME/.vimrc"
   "$HOME/.config/starship.toml"
   "$HOME/.config/alacritty/alacritty.toml"
   "$HOME/.config/wezterm/wezterm.lua"
@@ -277,6 +283,7 @@ case "$symlink_response" in
 
     # シンボリックリンクの作成
     echo "Creating symbolic links..."
+    ln -s "$DOTFILES_DIR/init.vim"        "$HOME/.vimrc"
     ln -s "$DOTFILES_DIR/starship.toml"        "$HOME/.config/starship.toml"
     ln -s "$DOTFILES_DIR/alacritty.toml"       "$HOME/.config/alacritty/alacritty.toml"
     ln -s "$DOTFILES_DIR/wezterm.lua"          "$HOME/.config/wezterm/wezterm.lua"
